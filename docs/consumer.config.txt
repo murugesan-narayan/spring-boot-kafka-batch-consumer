@@ -1,0 +1,169 @@
+Some useful properties to be considered for consumer config:
+
+    spring.kafka.listener.concurrency	1
+		Number of threads to run in the listener containers.
+
+	heartbeat.interval.ms	Default:	3000 (3 seconds)
+		The expected time between heartbeats to the consumer coordinator
+		when using Kafka's group management facilities.
+		Heartbeats are used to ensure that the consumer's session stays active and
+		to facilitate rebalancing when new consumers join or leave the group.
+
+		The value must be set lower than session.timeout.ms, but typically should be set
+		no higher than 1/3 of that value. It can be adjusted even lower to control
+		the expected time for normal rebalances.
+
+	fetch.min.bytes		Default:	1
+		The minimum amount of data the server should return for a fetch request.
+		If insufficient data is available the request will wait for that much data to accumulate before answering the request.
+
+	fetch.max.wait.ms		Default:	500
+		The maximum amount of time the server will block before answering the fetch request
+		if there isn't sufficient data to immediately satisfy the requirement given by fetch.min.bytes.
+
+	max.partition.fetch.bytes	Default:	1048576 (1 mebibyte)
+		The maximum amount of data per-partition the server will return.
+		Records are fetched in batches by the consumer.
+
+		If the first record batch in the first non-empty partition of the fetch is larger than this limit,
+		the batch will still be returned to ensure that the consumer can make progress.
+		The maximum record batch size accepted by the broker is defined
+		via message.max.bytes (broker config) or max.message.bytes (topic config)
+
+	fetch.max.bytes		Default:	52428800 (50 mebibytes)			Topic Level
+		The maximum amount of data the server should return for a fetch request.
+		Records are fetched in batches by the consumer, and if the first record batch
+		in the first non-empty partition of the fetch is larger than this value,
+		the record batch will still be returned to ensure that the consumer can make progress.
+
+		As such, this is not a absolute maximum.
+		The maximum record batch size accepted by the broker is defined
+		via message.max.bytes (broker config) or max.message.bytes (topic config).
+
+		Note that the consumer performs multiple fetches in parallel.
+		As per the information in KIP-81, the memory usage in practice should be something like
+		min(num brokers * max.fetch.bytes,  max.partition.fetch.bytes * num_partitions).
+
+	session.timeout.ms		Default:	45000 (45 seconds)
+		The timeout used to detect client failures when using Kafka's group management facility.
+		The client sends periodic heartbeats to indicate its liveness to the broker.
+		If no heartbeats are received by the broker before the expiration of this session timeout,
+		then the broker will remove this client from the group and initiate a rebalance.
+
+		Note that the value must be in the allowable range as configured in the broker configuration
+		by group.min.session.timeout.ms and group.max.session.timeout.ms.
+
+	auto.offset.reset		Default:	latest
+		What to do when there is no initial offset in Kafka or if the current offset does not exist any more
+		on the server (e.g. because that data has been deleted):
+
+		earliest: automatically reset the offset to the earliest offset
+		latest: automatically reset the offset to the latest offset
+		none: throw exception to the consumer if no previous offset is found for the consumer's group
+		anything else: throw exception to the consumer.
+
+	connections.max.idle.ms		Default:	540000 (9 minutes)
+		Close idle connections after the number of milliseconds specified by this config.
+
+	default.api.timeout.ms		Default:	60000 (1 minute)
+		Specifies the timeout (in milliseconds) for client APIs.
+		This configuration is used as the default timeout for all client operations
+		that do not specify a timeout parameter.
+
+	enable.auto.commit		Default:	true
+		If true the consumer's offset will be periodically committed in the background.
+
+	auto.commit.interval.ms		Default:	5000 (5 seconds)
+		The frequency in milliseconds that the consumer offsets are auto-committed to Kafka
+		if enable.auto.commit is set to true.
+
+	max.poll.interval.ms	Default:	300000 (5 minutes)
+		The maximum delay between invocations of poll() when using consumer group management.
+		This places an upper bound on the amount of time that the consumer can be idle before fetching more records.
+		If poll() is not called before expiration of this timeout, then the consumer is considered failed
+		and the group will rebalance in order to reassign the partitions to another member.
+
+	max.poll.records		Default:	500
+		The maximum number of records returned in a single call to poll().
+
+		Note, that max.poll.records does not impact the underlying fetching behavior.
+		The consumer will cache the records from each fetch request and returns them incrementally from each poll.
+
+	partition.assignment.strategy		Default:	[class org.apache.kafka.clients.consumer.RangeAssignor,
+													class org.apache.kafka.clients.consumer.CooperativeStickyAssignor]
+		A list of class names or class types, ordered by preference, of supported partition assignment strategies
+		that the client will use to distribute partition ownership amongst consumer instances
+		when group management is used.
+
+	receive.buffer.bytes		Default:	65536 (64 kibibytes)
+		The size of the TCP receive buffer (SO_RCVBUF) to use when reading data.
+		If the value is -1, the OS default will be used.
+
+	request.timeout.ms			Default:	30000 (30 seconds)
+		The configuration controls the maximum amount of time the client will wait for the response of a request.
+		If the response is not received before the timeout elapses the client will resend the request
+		if necessary or fail the request if retries are exhausted.
+
+	security.protocol			Default:	PLAINTEXT
+		Protocol used to communicate with brokers. Valid values are: PLAINTEXT, SSL, SASL_PLAINTEXT, SASL_SSL.
+
+	send.buffer.bytes			131072 (128 kibibytes)
+		The size of the TCP send buffer (SO_SNDBUF) to use when sending data. If the value is -1,
+		the OS default will be used.
+
+	socket.connection.setup.timeout.max.ms		Default:	30000 (30 seconds)
+		The maximum amount of time the client will wait for the socket connection to be established.
+		The connection setup timeout will increase exponentially for each consecutive
+		connection failure up to this maximum. To avoid connection storms,
+		a randomization factor of 0.2 will be applied to the timeout resulting in a random range
+		between 20% below and 20% above the computed value.
+
+	socket.connection.setup.timeout.ms			Default:	10000 (10 seconds)
+		The amount of time the client will wait for the socket connection to be established.
+		If the connection is not built before the timeout elapses, clients will close the socket channel.
+
+	ssl.enabled.protocols		Default:	TLSv1.2
+		The list of protocols enabled for SSL connections.
+		The default is 'TLSv1.2,TLSv1.3' when running with Java 11 or newer, 'TLSv1.2' otherwise.
+		With the default value for Java 11, clients and servers will prefer TLSv1.3
+		if both support it and fallback to TLSv1.2 otherwise (assuming both support at least TLSv1.2).
+		This default should be fine for most cases. Also see the config documentation for `ssl.protocol`.
+
+	ssl.keystore.type		Default:	JKS
+		The file format of the key store file. This is optional for client.
+
+	ssl.protocol		Default:	TLSv1.2
+		The SSL protocol used to generate the SSLContext. The default is 'TLSv1.3'
+		when running with Java 11 or newer, 'TLSv1.2' otherwise. This value should be fine
+		for most use cases. Allowed values in recent JVMs are 'TLSv1.2' and 'TLSv1.3'. 'TLS',
+		'TLSv1.1', 'SSL', 'SSLv2' and 'SSLv3' may be supported in older JVMs, but their usage is
+		discouraged due to known security vulnerabilities. With the default value for this config and
+		'ssl.enabled.protocols', clients will downgrade to 'TLSv1.2' if the server
+		does not support 'TLSv1.3'. If this config is set to 'TLSv1.2', clients will not use
+		'TLSv1.3' even if it is one of the values in ssl.enabled.protocols
+		and the server only supports 'TLSv1.3'.
+
+	ssl.provider		Default:	null
+		The name of the security provider used for SSL connections. Default value is the default security provider of the JVM.
+
+	ssl.truststore.type		Default:	JKS
+		The file format of the trust store file.
+
+	metadata.max.age.ms		Default:	300000 (5 minutes)
+		The period of time in milliseconds after which we force a refresh of metadata even
+		if we haven't seen any partition leadership changes to proactively discover any new brokers or partitions.
+
+	reconnect.backoff.ms		Default:	50
+		The base amount of time to wait before attempting to reconnect to a given host.
+		This avoids repeatedly connecting to a host in a tight loop.
+		This backoff applies to all connection attempts by the client to a broker.
+
+	reconnect.backoff.max.ms	Default:	1000 (1 second)
+		The maximum amount of time in milliseconds to wait when reconnecting to a broker
+		that has repeatedly failed to connect. If provided, the backoff per host will increase exponentially
+		for each consecutive connection failure, up to this maximum.
+		After calculating the backoff increase, 20% random jitter is added to avoid connection storms.
+
+	retry.backoff.ms		Default:	100
+		The amount of time to wait before attempting to retry a failed request to a given topic partition.
+		This avoids repeatedly sending requests in a tight loop under some failure scenarios.

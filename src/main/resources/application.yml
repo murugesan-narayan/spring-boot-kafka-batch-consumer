@@ -1,0 +1,29 @@
+spring:
+  kafka:
+    security:
+      protocol: "SSL"
+    bootstrap-servers: localhost:9093
+    ssl:
+      trust-store-location: classpath:/client-certs/kafka.client.truststore.jks
+      trust-store-password: keypass1
+      key-store-location: classpath:/client-certs/kafka.client.keystore.jks
+      key-store-password: keypass1
+    consumer:
+      group-id: Group-BC7.2.52
+      auto-offset-reset: earliest
+      max-poll-records: 2500
+      fetch-max-wait: 10000
+#      fetch-min-size: 1048576
+      fetch-min-size: 2097152
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      properties:
+        max.partition.fetch.bytes: 3145728
+        request.timeout.ms: 70000
+#        receive.buffer.bytes: 131072
+#        fetch.max.bytes: 2097152
+    listener:
+      type: batch
+consumer:
+  topic-name: TestTopic
+  storage-path: target
