@@ -20,11 +20,10 @@ import java.util.UUID;
 @Component
 @Slf4j
 public class KafkaBatchListener {
-
     @Value("${consumer.storage-path}")
     private String storagePath;
 
-    @KafkaListener(topics = "${consumer.topic-name}")
+    @KafkaListener(topics = "#{'${consumer.topic-names}'.split(',')}")
     public void receive(List<String> data,
                         @Header(KafkaHeaders.RECEIVED_PARTITION_ID) List<Integer> partitions,
                         @Header(KafkaHeaders.OFFSET) List<Long> offsets) {
