@@ -41,7 +41,7 @@ public class KafkaBatchListener {
     }
 
     private void writeToFile(List<String> data) {
-        String formattedTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("uuuu_MM_dd_hh_mm_ss_"));
+        String formattedTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("uuuu_MM_dd'T'hh_mm_ss_"));
         Path file = Path.of(storagePath, formattedTime+UUID.randomUUID()+".txt");
         try {
             Path createdFile = Files.createFile(file);
