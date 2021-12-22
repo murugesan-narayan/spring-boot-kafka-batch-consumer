@@ -1,5 +1,6 @@
 package com.muru.kafka.consumer.demo.config;
 
+import com.muru.kafka.consumer.demo.model.AlarmMessage;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -8,11 +9,13 @@ import org.springframework.kafka.annotation.EnableKafka;
 import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
 import org.springframework.kafka.core.ConsumerFactory;
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
-import org.springframework.kafka.listener.DefaultErrorHandler;
+import org.springframework.kafka.listener.*;
 import org.springframework.util.backoff.FixedBackOff;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import static org.springframework.util.backoff.FixedBackOff.UNLIMITED_ATTEMPTS;
 
 @EnableKafka
 @Configuration
@@ -20,28 +23,24 @@ import java.util.Map;
 public class KafkaConfig {
 
     @Autowired
-    private ConsumerFactory<String, String> consumerFactory;
+    private ConsumerFactory<String, AlarmMessage> consumerFactory;
 
-    public DefaultKafkaConsumerFactory<String, String> defaultKafkaConsumerFactory() {
+    public DefaultKafkaConsumerFactory<String, AlarmMessage> defaultKafkaConsumerFactory() {
         Map<String, Object> config = new HashMap<>(consumerFactory.getConfigurationProperties());
         return new DefaultKafkaConsumerFactory<>(config);
     }
 
     @Bean
-    public ConcurrentKafkaListenerContainerFactory<String, String> concurrentKafkaListenerContainerFactory() {
-        ConcurrentKafkaListenerContainerFactory<String, String> concurrentKafkaListenerContainerFactory =
+    public ConcurrentKafkaListenerContainerFactory<String, AlarmMessage> concurrentKafkaListenerContainerFactory() {
+        ConcurrentKafkaListenerContainerFactory<String, AlarmMessage> concurrentKafkaListenerContainerFactory =
                 new ConcurrentKafkaListenerContainerFactory<>();
         concurrentKafkaListenerContainerFactory.setConsumerFactory(defaultKafkaConsumerFactory());
-        concurrentKafkaListenerContainerFactory.setBatchListener(true);
-        concurrentKafkaListenerContainerFactory.setCommonErrorHandler(errorHandler());
         return concurrentKafkaListenerContainerFactory;
     }
 
-    private DefaultErrorHandler errorHandler() {
-        return new DefaultErrorHandler((record, exception) -> {
-            // recover after 3 failures, with no back off - e.g. send to a dead-letter topic
-            log.error("Error while batch processing...");
-            }, new FixedBackOff(5000L, 2L));
+    @Bean
+    public CommonErrorHandler errorHandler() {
+        return new DefaultErrorHandler(
+                new FixedBackOff(60000L, UNLIMITED_ATTEMPTS));
     }
-
 }

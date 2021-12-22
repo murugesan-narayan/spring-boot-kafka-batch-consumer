@@ -15,7 +15,7 @@ spring:
       fetch-max-wait: 35000
       fetch-min-size: 3145728
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
       properties:
 #        max.partition.fetch.bytes: 5194304
         max.partition.fetch.bytes: 13631488
@@ -23,6 +23,8 @@ spring:
         allow.auto.create.topics: false
         partition.assignment.strategy: org.apache.kafka.clients.consumer.RoundRobinAssignor
         fetch.max.bytes: 62914560
+        spring.json.value.default.type: com.muru.kafka.consumer.demo.model.AlarmMessage
+    #   spring.json.trusted.packages: com.muru.kafka.consumer.demo.model
     listener:
       type: batch
       concurrency: 4
