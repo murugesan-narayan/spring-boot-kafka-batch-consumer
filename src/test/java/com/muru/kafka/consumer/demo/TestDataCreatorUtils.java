@@ -82,11 +82,11 @@ class TestDataCreatorUtils {
         message.setX733ProbableCause(RandomString.make(1));  //1
         message.setX733SpecificProb("a");    //1
         message.setX733CorrNotif("a");   //1
-        message.setURL(RandomString.make(15)); //15
+        message.setUrl(RandomString.make(15)); //15
         message.setExtendedAttr(RandomString.make(15));    //15
         message.setOldRow(RandomString.make(1)); //1
         message.setProbeSubSecondId(RandomString.make(3));   //3
-        message.setBSM_Identity("a");    //1
+        message.setBsmIdentity("a");    //1
         message.setCollectionFirst("1970-01-01T01:00:00");
         message.setAggregationFirst("2021-11-29T12:45:17");
         message.setAcknowledgeUID(RandomString.make(3));  //3
@@ -118,8 +118,8 @@ class TestDataCreatorUtils {
         message.setTicketAction(RandomString.make(3));   //3
         message.setDiagInfo("a");   //1
         message.setAlertKeyAlias(RandomString.make(50));   //50
-        message.setEMSAlarmId(RandomString.make(1));    //1
-        message.setXinY("a");  //1
+        message.setEmsAlarmId(RandomString.make(1));    //1
+        message.setXInY("a");  //1
         message.setInfo1("a");  //1
         message.setInfo2("a");  //1
         message.setCallOut(RandomString.make(1));    //1
@@ -128,41 +128,41 @@ class TestDataCreatorUtils {
         message.setLon("a");  //1
         message.setLat("a");  //1
         message.setManagedFlag(RandomString.make(2));   //2
-        message.setUTSAOT("a");  //1
-        message.setRCACauseType(RandomString.make(1));    //1
-        message.setRCAEventType("a");  //1
-        message.setRCAIdentifier("a");  //1
-        message.setRCAOrgSeverity(RandomString.make(1));    //1
-        message.setRCAProblemText("a");  //1
-        message.setRCAStateChange("2021-11-29T14:35:42");
+        message.setUtsaot("a");  //1
+        message.setRcaCauseType(RandomString.make(1));    //1
+        message.setRcaEventType("a");  //1
+        message.setRcaIdentifier("a");  //1
+        message.setRcaOrgSeverity(RandomString.make(1));    //1
+        message.setRcaProblemText("a");  //1
+        message.setRcaStateChange("2021-11-29T14:35:42");
         message.setRemoteNodeAlias("a");  //1
         message.setRemotePriObj("a");  //1
         message.setRemoteRootObj("a");  //1
         message.setRemoteSecObj("a");  //1
         message.setService("a");  //1
-        message.setSEServiceName("a");  //1
-        message.setSEProblemText("a");  //1
-        message.setSEServiceType(RandomString.make(1));    //1
-        message.setSEState(RandomString.make(1));    //1
+        message.setSeServiceName("a");  //1
+        message.setSeProblemText("a");  //1
+        message.setSeServiceType(RandomString.make(1));    //1
+        message.setSeState(RandomString.make(1));    //1
         message.setLayer(RandomString.make(1));    //1
         message.setClusterName("a");  //1
         message.setClusterSize(RandomString.make(1));    //1
         message.setMonitoringOptions("a");  //1
         message.setUseType("a");  //1
-        message.setUTSTime1("2021-11-29T14:35:42");
-        message.setRCAOldSeverity(RandomString.make(1));    //1
+        message.setUtsTime1("2021-11-29T14:35:42");
+        message.setRcaOldSeverity(RandomString.make(1));    //1
         message.setParked(RandomString.make(1));    //1
         message.setFrontOffice(RandomString.make(3));   //3
         message.setRegion(RandomString.make(1));    //1
         message.setAlarmHelp("a");  //1
-        message.setOIDKey(RandomString.make(20));   //90
-        message.setOIDVisible(RandomString.make(1));    //1
+        message.setOidKey(RandomString.make(20));   //90
+        message.setOidVisible(RandomString.make(1));    //1
         message.setClassVisible(RandomString.make(1));    //1
         message.setNodeVisible(RandomString.make(1));    //1
         message.setNodeValue(RandomString.make(1));    //1
         message.setParentIdentifier("a");  //1
-        message.setIBMExtractedType("a");  //1
-        message.setIBMProcessingStage(RandomString.make(1));    //1
+        message.setIbmExtractedType("a");  //1
+        message.setIbmProcessingStage(RandomString.make(1));    //1
         message.setServerName(RandomString.make(7));   //7
         message.setServerSerial(RandomString.make(10));   //10-1
 

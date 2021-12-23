@@ -11,270 +11,270 @@ import static org.springframework.util.StringUtils.quote;
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class AlarmMessage {
-    @JsonProperty("NetcoolEventAction") private String NetcoolEventAction; //5-10
-    @JsonProperty("Identifier") private String Identifier; //120
-    @JsonProperty("Node") private String Node; //20
-    @JsonProperty("NodeAlias") private String NodeAlias; //12
-    @JsonProperty("Manager") private String Manager; //20
-    @JsonProperty("Agent") private String Agent; //30
-    @JsonProperty("AlertGroup") private String AlertGroup; //15
-    @JsonProperty("AlertKey") private String AlertKey; //50
-    @JsonProperty("Severity") private String Severity; //1,
-    @JsonProperty("Summary") private String Summary; //50
-    @JsonProperty("StateChange") private String StateChange; //20
-    @JsonProperty("FirstOccurrence") private String FirstOccurrence; //2021-11-29 12:45:13
-    @JsonProperty("LastOccurrence") private String LastOccurrence; //2021-12-15 12:27:20
-    @JsonProperty("InternalLast") private String InternalLast; //2021-12-15T12:27:28
-    @JsonProperty("Poll") private String Poll;   //1
-    @JsonProperty("Type") private String Type;   //1
-    @JsonProperty("Tally") private String Tally;  //4
-    @JsonProperty("Class") private String ClassData;  //6
-    @JsonProperty("Grade") private String Grade;  //1
-    @JsonProperty("Location") private String Location; //10
-    @JsonProperty("OwnerUID") private String OwnerUID;   //5
-    @JsonProperty("OwnerGID") private String OwnerGID;   //1
-    @JsonProperty("Acknowledged") private String Acknowledged;   //1
-    @JsonProperty("Flash") private String Flash;   //1
-    @JsonProperty("EventId") private String EventId; //60
-    @JsonProperty("ExpireTime") private String ExpireTime;   //1
-    @JsonProperty("ProcessReq") private String ProcessReq;   //1
-    @JsonProperty("SuppressEscl") private String SuppressEscl;   //2
-    @JsonProperty("Customer") private String Customer;    //10
-    @JsonProperty("PhysicalSlot") private String PhysicalSlot;   //1
-    @JsonProperty("PhysicalPort") private String PhysicalPort;   //1
-    @JsonProperty("TaskList") private String TaskList;   //1
-    @JsonProperty("NmosSerial") private String NmosSerial;  //5
-    @JsonProperty("NmosObjInst") private String NmosObjInst;    //1
-    @JsonProperty("NmosCauseType") private String NmosCauseType;  //1
-    @JsonProperty("NmosDomainName") private String NmosDomainName;  //5
-    @JsonProperty("NmosEntityId") private String NmosEntityId;   //1
-    @JsonProperty("NmosManagedStatus") private String NmosManagedStatus;  //1
-    @JsonProperty("NmosEventMap") private String NmosEventMap;    //10
-    @JsonProperty("LocalNodeAlias") private String LocalNodeAlias;  //10
-    @JsonProperty("LocalPriObj") private String LocalPriObj; //1
-    @JsonProperty("LocalSecObj") private String LocalSecObj; //1
-    @JsonProperty("LocalRootObj") private String LocalRootObj;    //1
-    @JsonProperty("X733EventType") private String X733EventType;  //3
-    @JsonProperty("X733ProbableCause") private String X733ProbableCause;  //1
-    @JsonProperty("X733SpecificProb") private String X733SpecificProb;    //1
-    @JsonProperty("X733CorrNotif") private String X733CorrNotif;   //1
-    @JsonProperty("URL") private String URL; //15
-    @JsonProperty("ExtendedAttr") private String ExtendedAttr;    //15
-    @JsonProperty("OldRow") private String OldRow; //1
-    @JsonProperty("ProbeSubSecondId") private String ProbeSubSecondId;   //3
-    @JsonProperty("BSM_Identity") private String BSM_Identity;    //1
-    @JsonProperty("CollectionFirst") private String CollectionFirst; //1970-01-01T01:00:00
-    @JsonProperty("AggregationFirst") private String AggregationFirst;  //2021-11-29T12:45:17
-    @JsonProperty("AcknowledgeUID") private String AcknowledgeUID;  //3
-    @JsonProperty("ToggleCount") private String ToggleCount;    //1
-    @JsonProperty("ToggleDelay") private String ToggleDelay;    //1
-    @JsonProperty("EscalateFlag") private String EscalateFlag;    //1
-    @JsonProperty("Family") private String Family;  //1
-    @JsonProperty("OnCall") private String OnCall;  //1
-    @JsonProperty("Ticket") private String Ticket;  //15
-    @JsonProperty("OldSeverity") private String OldSeverity;    //1
-    @JsonProperty("OldOccurrence") private String OldOccurrence;   //2021-11-29T12:45:13
-    @JsonProperty("DeduplicationOrder") private String DeduplicationOrder;    //1
-    @JsonProperty("CurrentSince") private String CurrentSince;    //2021-11-29 12:45:13
-    @JsonProperty("Site") private String Site;   //10
-    @JsonProperty("ParentElement") private String ParentElement;  //1
-    @JsonProperty("Department") private String Department;  //1
-    @JsonProperty("IncidentID") private String IncidentID;  //1
-    @JsonProperty("DevicePrio") private String DevicePrio;    //1
-    @JsonProperty("OperatorNote") private String OperatorNote;   //50
-    @JsonProperty("HighFlappingEndCount") private String HighFlappingEndCount;    //1
-    @JsonProperty("HighFlappingEndTime") private String HighFlappingEndTime; //1970-01-01T01:00:00
-    @JsonProperty("HighFlappingCount") private String HighFlappingCount;    //1
-    @JsonProperty("HighFlappingWindow") private String HighFlappingWindow;    //1
-    @JsonProperty("LowFlappingEndCount") private String LowFlappingEndCount;    //1
-    @JsonProperty("LowFlappingEndTime") private String LowFlappingEndTime;  //1970-01-01T01:00:00
-    @JsonProperty("LowFlappingCount") private String LowFlappingCount;    //1
-    @JsonProperty("LowFlappingWindow") private String LowFlappingWindow;    //1
-    @JsonProperty("WatchList") private String WatchList;  //1
-    @JsonProperty("TicketAction") private String TicketAction;   //3
-    @JsonProperty("DiagInfo") private String DiagInfo;   //1
-    @JsonProperty("AlertKeyAlias") private String AlertKeyAlias;   //50
-    @JsonProperty("EMSAlarmId") private String EMSAlarmId;    //1
-    @JsonProperty("XinY") private String XinY;  //1
-    @JsonProperty("Info1") private String Info1;  //1
-    @JsonProperty("Info2") private String Info2;  //1
-    @JsonProperty("CallOut") private String CallOut;    //1
-    @JsonProperty("ServiceImpact") private String ServiceImpact;    //1
-    @JsonProperty("ServicePrio") private String ServicePrio;    //1
-    @JsonProperty("Lon") private String Lon;  //1
-    @JsonProperty("Lat") private String Lat;  //1
-    @JsonProperty("ManagedFlag") private String ManagedFlag;   //2
-    @JsonProperty("UTSAOT") private String UTSAOT;  //1
-    @JsonProperty("RCACauseType") private String RCACauseType;    //1
-    @JsonProperty("RCAEventType") private String RCAEventType;  //1
-    @JsonProperty("RCAIdentifier") private String RCAIdentifier;  //1
-    @JsonProperty("RCAOrgSeverity") private String RCAOrgSeverity;    //1
-    @JsonProperty("RCAProblemText") private String RCAProblemText;  //1
-    @JsonProperty("RCAStateChange") private String RCAStateChange;  //2021-11-29T14:35:42
-    @JsonProperty("RemoteNodeAlias") private String RemoteNodeAlias;  //1
-    @JsonProperty("RemotePriObj") private String RemotePriObj;  //1
-    @JsonProperty("RemoteRootObj") private String RemoteRootObj;  //1
-    @JsonProperty("RemoteSecObj") private String RemoteSecObj;  //1
-    @JsonProperty("Service") private String Service;  //1
-    @JsonProperty("SEServiceName") private String SEServiceName;  //1
-    @JsonProperty("SEProblemText") private String SEProblemText;  //1
-    @JsonProperty("SEServiceType") private String SEServiceType;    //1
-    @JsonProperty("SEState") private String SEState;    //1
-    @JsonProperty("Layer") private String Layer;    //1
-    @JsonProperty("ClusterName") private String ClusterName;  //1
-    @JsonProperty("ClusterSize") private String ClusterSize;    //1
-    @JsonProperty("MonitoringOptions") private String MonitoringOptions;  //1
-    @JsonProperty("UseType") private String UseType;  //1
-    @JsonProperty("UTSTime1") private String UTSTime1;    //2021-11-29T14:35:42
-    @JsonProperty("RCAOldSeverity") private String RCAOldSeverity;    //1
-    @JsonProperty("Parked") private String Parked;    //1
-    @JsonProperty("FrontOffice") private String FrontOffice;   //3
-    @JsonProperty("Region") private String Region;    //1
-    @JsonProperty("AlarmHelp") private String AlarmHelp;  //1
-    @JsonProperty("OIDKey") private String OIDKey;   //90
-    @JsonProperty("OIDVisible") private String OIDVisible;    //1
-    @JsonProperty("ClassVisible") private String ClassVisible;    //1
-    @JsonProperty("NodeVisible") private String NodeVisible;    //1
-    @JsonProperty("NodeValue") private String NodeValue;    //1
-    @JsonProperty("ParentIdentifier") private String ParentIdentifier;  //1
-    @JsonProperty("IBMExtractedType") private String IBMExtractedType;  //1
-    @JsonProperty("IBMProcessingStage") private String IBMProcessingStage;    //1
-    @JsonProperty("ServerName") private String ServerName;   //7
-    @JsonProperty("ServerSerial") private String ServerSerial;   //10
+    @JsonProperty("NetcoolEventAction") private String netcoolEventAction; //5-10
+    @JsonProperty("Identifier") private String identifier; //120
+    @JsonProperty("Node") private String node; //20
+    @JsonProperty("NodeAlias") private String nodeAlias; //12
+    @JsonProperty("Manager") private String manager; //20
+    @JsonProperty("Agent") private String agent; //30
+    @JsonProperty("AlertGroup") private String alertGroup; //15
+    @JsonProperty("AlertKey") private String alertKey; //50
+    @JsonProperty("Severity") private String severity; //1,
+    @JsonProperty("Summary") private String summary; //50
+    @JsonProperty("StateChange") private String stateChange; //20
+    @JsonProperty("FirstOccurrence") private String firstOccurrence; //2021-11-29 12:45:13
+    @JsonProperty("LastOccurrence") private String lastOccurrence; //2021-12-15 12:27:20
+    @JsonProperty("InternalLast") private String internalLast; //2021-12-15T12:27:28
+    @JsonProperty("Poll") private String poll;   //1
+    @JsonProperty("Type") private String type;   //1
+    @JsonProperty("Tally") private String tally;  //4
+    @JsonProperty("Class") private String classData;  //6
+    @JsonProperty("Grade") private String grade;  //1
+    @JsonProperty("Location") private String location; //10
+    @JsonProperty("OwnerUID") private String ownerUID;   //5
+    @JsonProperty("OwnerGID") private String ownerGID;   //1
+    @JsonProperty("Acknowledged") private String acknowledged;   //1
+    @JsonProperty("Flash") private String flash;   //1
+    @JsonProperty("EventId") private String eventId; //60
+    @JsonProperty("ExpireTime") private String expireTime;   //1
+    @JsonProperty("ProcessReq") private String processReq;   //1
+    @JsonProperty("SuppressEscl") private String suppressEscl;   //2
+    @JsonProperty("Customer") private String customer;    //10
+    @JsonProperty("PhysicalSlot") private String physicalSlot;   //1
+    @JsonProperty("PhysicalPort") private String physicalPort;   //1
+    @JsonProperty("TaskList") private String taskList;   //1
+    @JsonProperty("NmosSerial") private String nmosSerial;  //5
+    @JsonProperty("NmosObjInst") private String nmosObjInst;    //1
+    @JsonProperty("NmosCauseType") private String nmosCauseType;  //1
+    @JsonProperty("NmosDomainName") private String nmosDomainName;  //5
+    @JsonProperty("NmosEntityId") private String nmosEntityId;   //1
+    @JsonProperty("NmosManagedStatus") private String nmosManagedStatus;  //1
+    @JsonProperty("NmosEventMap") private String nmosEventMap;    //10
+    @JsonProperty("LocalNodeAlias") private String localNodeAlias;  //10
+    @JsonProperty("LocalPriObj") private String localPriObj; //1
+    @JsonProperty("LocalSecObj") private String localSecObj; //1
+    @JsonProperty("LocalRootObj") private String localRootObj;    //1
+    @JsonProperty("X733EventType") private String x733EventType;  //3
+    @JsonProperty("X733ProbableCause") private String x733ProbableCause;  //1
+    @JsonProperty("X733SpecificProb") private String x733SpecificProb;    //1
+    @JsonProperty("X733CorrNotif") private String x733CorrNotif;   //1
+    @JsonProperty("URL") private String url; //15
+    @JsonProperty("ExtendedAttr") private String extendedAttr;    //15
+    @JsonProperty("OldRow") private String oldRow; //1
+    @JsonProperty("ProbeSubSecondId") private String probeSubSecondId;   //3
+    @JsonProperty("BSM_Identity") private String bsmIdentity;    //1
+    @JsonProperty("CollectionFirst") private String collectionFirst; //1970-01-01T01:00:00
+    @JsonProperty("AggregationFirst") private String aggregationFirst;  //2021-11-29T12:45:17
+    @JsonProperty("AcknowledgeUID") private String acknowledgeUID;  //3
+    @JsonProperty("ToggleCount") private String toggleCount;    //1
+    @JsonProperty("ToggleDelay") private String toggleDelay;    //1
+    @JsonProperty("EscalateFlag") private String escalateFlag;    //1
+    @JsonProperty("Family") private String family;  //1
+    @JsonProperty("OnCall") private String onCall;  //1
+    @JsonProperty("Ticket") private String ticket;  //15
+    @JsonProperty("OldSeverity") private String oldSeverity;    //1
+    @JsonProperty("OldOccurrence") private String oldOccurrence;   //2021-11-29T12:45:13
+    @JsonProperty("DeduplicationOrder") private String deduplicationOrder;    //1
+    @JsonProperty("CurrentSince") private String currentSince;    //2021-11-29 12:45:13
+    @JsonProperty("Site") private String site;   //10
+    @JsonProperty("ParentElement") private String parentElement;  //1
+    @JsonProperty("Department") private String department;  //1
+    @JsonProperty("IncidentID") private String incidentID;  //1
+    @JsonProperty("DevicePrio") private String devicePrio;    //1
+    @JsonProperty("OperatorNote") private String operatorNote;   //50
+    @JsonProperty("HighFlappingEndCount") private String highFlappingEndCount;    //1
+    @JsonProperty("HighFlappingEndTime") private String highFlappingEndTime; //1970-01-01T01:00:00
+    @JsonProperty("HighFlappingCount") private String highFlappingCount;    //1
+    @JsonProperty("HighFlappingWindow") private String highFlappingWindow;    //1
+    @JsonProperty("LowFlappingEndCount") private String lowFlappingEndCount;    //1
+    @JsonProperty("LowFlappingEndTime") private String lowFlappingEndTime;  //1970-01-01T01:00:00
+    @JsonProperty("LowFlappingCount") private String lowFlappingCount;    //1
+    @JsonProperty("LowFlappingWindow") private String lowFlappingWindow;    //1
+    @JsonProperty("WatchList") private String watchList;  //1
+    @JsonProperty("TicketAction") private String ticketAction;   //3
+    @JsonProperty("DiagInfo") private String diagInfo;   //1
+    @JsonProperty("AlertKeyAlias") private String alertKeyAlias;   //50
+    @JsonProperty("EMSAlarmId") private String emsAlarmId;    //1
+    @JsonProperty("XinY") private String xInY;  //1
+    @JsonProperty("Info1") private String info1;  //1
+    @JsonProperty("Info2") private String info2;  //1
+    @JsonProperty("CallOut") private String callOut;    //1
+    @JsonProperty("ServiceImpact") private String serviceImpact;    //1
+    @JsonProperty("ServicePrio") private String servicePrio;    //1
+    @JsonProperty("Lon") private String lon;  //1
+    @JsonProperty("Lat") private String lat;  //1
+    @JsonProperty("ManagedFlag") private String managedFlag;   //2
+    @JsonProperty("UTSAOT") private String utsaot;  //1
+    @JsonProperty("RCACauseType") private String rcaCauseType;    //1
+    @JsonProperty("RCAEventType") private String rcaEventType;  //1
+    @JsonProperty("RCAIdentifier") private String rcaIdentifier;  //1
+    @JsonProperty("RCAOrgSeverity") private String rcaOrgSeverity;    //1
+    @JsonProperty("RCAProblemText") private String rcaProblemText;  //1
+    @JsonProperty("RCAStateChange") private String rcaStateChange;  //2021-11-29T14:35:42
+    @JsonProperty("RemoteNodeAlias") private String remoteNodeAlias;  //1
+    @JsonProperty("RemotePriObj") private String remotePriObj;  //1
+    @JsonProperty("RemoteRootObj") private String remoteRootObj;  //1
+    @JsonProperty("RemoteSecObj") private String remoteSecObj;  //1
+    @JsonProperty("Service") private String service;  //1
+    @JsonProperty("SEServiceName") private String seServiceName;  //1
+    @JsonProperty("SEProblemText") private String seProblemText;  //1
+    @JsonProperty("SEServiceType") private String seServiceType;    //1
+    @JsonProperty("SEState") private String seState;    //1
+    @JsonProperty("Layer") private String layer;    //1
+    @JsonProperty("ClusterName") private String clusterName;  //1
+    @JsonProperty("ClusterSize") private String clusterSize;    //1
+    @JsonProperty("MonitoringOptions") private String monitoringOptions;  //1
+    @JsonProperty("UseType") private String useType;  //1
+    @JsonProperty("UTSTime1") private String utsTime1;    //2021-11-29T14:35:42
+    @JsonProperty("RCAOldSeverity") private String rcaOldSeverity;    //1
+    @JsonProperty("Parked") private String parked;    //1
+    @JsonProperty("FrontOffice") private String frontOffice;   //3
+    @JsonProperty("Region") private String region;    //1
+    @JsonProperty("AlarmHelp") private String alarmHelp;  //1
+    @JsonProperty("OIDKey") private String oidKey;   //90
+    @JsonProperty("OIDVisible") private String oidVisible;    //1
+    @JsonProperty("ClassVisible") private String classVisible;    //1
+    @JsonProperty("NodeVisible") private String nodeVisible;    //1
+    @JsonProperty("NodeValue") private String nodeValue;    //1
+    @JsonProperty("ParentIdentifier") private String parentIdentifier;  //1
+    @JsonProperty("IBMExtractedType") private String ibmExtractedType;  //1
+    @JsonProperty("IBMProcessingStage") private String ibmProcessingStage;    //1
+    @JsonProperty("ServerName") private String serverName;   //7
+    @JsonProperty("ServerSerial") private String serverSerial;   //10
 
     @Override
     public String toString() {
         StringJoiner joiner = new StringJoiner(",");
-        joiner.add(quote(this.NetcoolEventAction));
-        joiner.add(quote(this.Identifier));
-        joiner.add(quote(this.Node));
-        joiner.add(quote(this.NodeAlias));
-        joiner.add(quote(this.Manager));
-        joiner.add(quote(this.Agent));
-        joiner.add(quote(this.AlertGroup));
-        joiner.add(quote(this.AlertKey));
-        joiner.add(quote(this.Severity));
-        joiner.add(quote(this.Summary));
-        joiner.add(quote(this.StateChange));
-        joiner.add(quote(this.FirstOccurrence));
-        joiner.add(quote(this.LastOccurrence));
-        joiner.add(quote(this.InternalLast));
-        joiner.add(quote(this.Poll));
-        joiner.add(quote(this.Type));
-        joiner.add(quote(this.Tally));
-        joiner.add(quote(this.ClassData));
-        joiner.add(quote(this.Grade));
-        joiner.add(quote(this.Location));
-        joiner.add(quote(this.OwnerUID));
-        joiner.add(quote(this.OwnerGID));
-        joiner.add(quote(this.Acknowledged));
-        joiner.add(quote(this.Flash));
-        joiner.add(quote(this.EventId));
-        joiner.add(quote(this.ExpireTime));
-        joiner.add(quote(this.ProcessReq));
-        joiner.add(quote(this.SuppressEscl));
-        joiner.add(quote(this.Customer));
-        joiner.add(quote(this.PhysicalSlot));
-        joiner.add(quote(this.PhysicalPort));
-        joiner.add(quote(this.TaskList));
-        joiner.add(quote(this.NmosSerial));
-        joiner.add(quote(this.NmosObjInst));
-        joiner.add(quote(this.NmosCauseType));
-        joiner.add(quote(this.NmosDomainName));
-        joiner.add(quote(this.NmosEntityId));
-        joiner.add(quote(this.NmosManagedStatus));
-        joiner.add(quote(this.NmosEventMap));
-        joiner.add(quote(this.LocalNodeAlias));
-        joiner.add(quote(this.LocalPriObj));
-        joiner.add(quote(this.LocalSecObj));
-        joiner.add(quote(this.LocalRootObj));
-        joiner.add(quote(this.X733EventType));
-        joiner.add(quote(this.X733ProbableCause));
-        joiner.add(quote(this.X733SpecificProb));
-        joiner.add(quote(this.X733CorrNotif));
-        joiner.add(quote(this.URL));
-        joiner.add(quote(this.ExtendedAttr));
-        joiner.add(quote(this.OldRow));
-        joiner.add(quote(this.ProbeSubSecondId));
-        joiner.add(quote(this.BSM_Identity));
-        joiner.add(quote(this.CollectionFirst));
-        joiner.add(quote(this.AggregationFirst));
-        joiner.add(quote(this.AcknowledgeUID));
-        joiner.add(quote(this.ToggleCount));
-        joiner.add(quote(this.ToggleDelay));
-        joiner.add(quote(this.EscalateFlag));
-        joiner.add(quote(this.Family));
-        joiner.add(quote(this.OnCall));
-        joiner.add(quote(this.Ticket));
-        joiner.add(quote(this.OldSeverity));
-        joiner.add(quote(this.OldOccurrence));
-        joiner.add(quote(this.DeduplicationOrder));
-        joiner.add(quote(this.CurrentSince));
-        joiner.add(quote(this.Site));
-        joiner.add(quote(this.ParentElement));
-        joiner.add(quote(this.Department));
-        joiner.add(quote(this.IncidentID));
-        joiner.add(quote(this.DevicePrio));
-        joiner.add(quote(this.OperatorNote));
-        joiner.add(quote(this.HighFlappingEndCount));
-        joiner.add(quote(this.HighFlappingEndTime));
-        joiner.add(quote(this.HighFlappingCount));
-        joiner.add(quote(this.HighFlappingWindow));
-        joiner.add(quote(this.LowFlappingEndCount));
-        joiner.add(quote(this.LowFlappingEndTime));
-        joiner.add(quote(this.LowFlappingCount));
-        joiner.add(quote(this.LowFlappingWindow));
-        joiner.add(quote(this.WatchList));
-        joiner.add(quote(this.TicketAction));
-        joiner.add(quote(this.DiagInfo));
-        joiner.add(quote(this.AlertKeyAlias));
-        joiner.add(quote(this.EMSAlarmId));
-        joiner.add(quote(this.XinY));
-        joiner.add(quote(this.Info1));
-        joiner.add(quote(this.Info2));
-        joiner.add(quote(this.CallOut));
-        joiner.add(quote(this.ServiceImpact));
-        joiner.add(quote(this.ServicePrio));
-        joiner.add(quote(this.Lon));
-        joiner.add(quote(this.Lat));
-        joiner.add(quote(this.ManagedFlag));
-        joiner.add(quote(this.UTSAOT));
-        joiner.add(quote(this.RCACauseType));
-        joiner.add(quote(this.RCAEventType));
-        joiner.add(quote(this.RCAIdentifier));
-        joiner.add(quote(this.RCAOrgSeverity));
-        joiner.add(quote(this.RCAProblemText));
-        joiner.add(quote(this.RCAStateChange));
-        joiner.add(quote(this.RemoteNodeAlias));
-        joiner.add(quote(this.RemotePriObj));
-        joiner.add(quote(this.RemoteRootObj));
-        joiner.add(quote(this.RemoteSecObj));
-        joiner.add(quote(this.Service));
-        joiner.add(quote(this.SEServiceName));
-        joiner.add(quote(this.SEProblemText));
-        joiner.add(quote(this.SEServiceType));
-        joiner.add(quote(this.SEState));
-        joiner.add(quote(this.Layer));
-        joiner.add(quote(this.ClusterName));
-        joiner.add(quote(this.ClusterSize));
-        joiner.add(quote(this.MonitoringOptions));
-        joiner.add(quote(this.UseType));
-        joiner.add(quote(this.UTSTime1));
-        joiner.add(quote(this.RCAOldSeverity));
-        joiner.add(quote(this.Parked));
-        joiner.add(quote(this.FrontOffice));
-        joiner.add(quote(this.Region));
-        joiner.add(quote(this.AlarmHelp));
-        joiner.add(quote(this.OIDKey));
-        joiner.add(quote(this.OIDVisible));
-        joiner.add(quote(this.ClassVisible));
-        joiner.add(quote(this.NodeVisible));
-        joiner.add(quote(this.NodeValue));
-        joiner.add(quote(this.ParentIdentifier));
-        joiner.add(quote(this.IBMExtractedType));
-        joiner.add(quote(this.IBMProcessingStage));
-        joiner.add(quote(this.ServerName));
-        joiner.add(quote(this.ServerSerial));
+        joiner.add(quote(this.netcoolEventAction));
+        joiner.add(quote(this.identifier));
+        joiner.add(quote(this.node));
+        joiner.add(quote(this.nodeAlias));
+        joiner.add(quote(this.manager));
+        joiner.add(quote(this.agent));
+        joiner.add(quote(this.alertGroup));
+        joiner.add(quote(this.alertKey));
+        joiner.add(quote(this.severity));
+        joiner.add(quote(this.summary));
+        joiner.add(quote(this.stateChange));
+        joiner.add(quote(this.firstOccurrence));
+        joiner.add(quote(this.lastOccurrence));
+        joiner.add(quote(this.internalLast));
+        joiner.add(quote(this.poll));
+        joiner.add(quote(this.type));
+        joiner.add(quote(this.tally));
+        joiner.add(quote(this.classData));
+        joiner.add(quote(this.grade));
+        joiner.add(quote(this.location));
+        joiner.add(quote(this.ownerUID));
+        joiner.add(quote(this.ownerGID));
+        joiner.add(quote(this.acknowledged));
+        joiner.add(quote(this.flash));
+        joiner.add(quote(this.eventId));
+        joiner.add(quote(this.expireTime));
+        joiner.add(quote(this.processReq));
+        joiner.add(quote(this.suppressEscl));
+        joiner.add(quote(this.customer));
+        joiner.add(quote(this.physicalSlot));
+        joiner.add(quote(this.physicalPort));
+        joiner.add(quote(this.taskList));
+        joiner.add(quote(this.nmosSerial));
+        joiner.add(quote(this.nmosObjInst));
+        joiner.add(quote(this.nmosCauseType));
+        joiner.add(quote(this.nmosDomainName));
+        joiner.add(quote(this.nmosEntityId));
+        joiner.add(quote(this.nmosManagedStatus));
+        joiner.add(quote(this.nmosEventMap));
+        joiner.add(quote(this.localNodeAlias));
+        joiner.add(quote(this.localPriObj));
+        joiner.add(quote(this.localSecObj));
+        joiner.add(quote(this.localRootObj));
+        joiner.add(quote(this.x733EventType));
+        joiner.add(quote(this.x733ProbableCause));
+        joiner.add(quote(this.x733SpecificProb));
+        joiner.add(quote(this.x733CorrNotif));
+        joiner.add(quote(this.url));
+        joiner.add(quote(this.extendedAttr));
+        joiner.add(quote(this.oldRow));
+        joiner.add(quote(this.probeSubSecondId));
+        joiner.add(quote(this.bsmIdentity));
+        joiner.add(quote(this.collectionFirst));
+        joiner.add(quote(this.aggregationFirst));
+        joiner.add(quote(this.acknowledgeUID));
+        joiner.add(quote(this.toggleCount));
+        joiner.add(quote(this.toggleDelay));
+        joiner.add(quote(this.escalateFlag));
+        joiner.add(quote(this.family));
+        joiner.add(quote(this.onCall));
+        joiner.add(quote(this.ticket));
+        joiner.add(quote(this.oldSeverity));
+        joiner.add(quote(this.oldOccurrence));
+        joiner.add(quote(this.deduplicationOrder));
+        joiner.add(quote(this.currentSince));
+        joiner.add(quote(this.site));
+        joiner.add(quote(this.parentElement));
+        joiner.add(quote(this.department));
+        joiner.add(quote(this.incidentID));
+        joiner.add(quote(this.devicePrio));
+        joiner.add(quote(this.operatorNote));
+        joiner.add(quote(this.highFlappingEndCount));
+        joiner.add(quote(this.highFlappingEndTime));
+        joiner.add(quote(this.highFlappingCount));
+        joiner.add(quote(this.highFlappingWindow));
+        joiner.add(quote(this.lowFlappingEndCount));
+        joiner.add(quote(this.lowFlappingEndTime));
+        joiner.add(quote(this.lowFlappingCount));
+        joiner.add(quote(this.lowFlappingWindow));
+        joiner.add(quote(this.watchList));
+        joiner.add(quote(this.ticketAction));
+        joiner.add(quote(this.diagInfo));
+        joiner.add(quote(this.alertKeyAlias));
+        joiner.add(quote(this.emsAlarmId));
+        joiner.add(quote(this.xInY));
+        joiner.add(quote(this.info1));
+        joiner.add(quote(this.info2));
+        joiner.add(quote(this.callOut));
+        joiner.add(quote(this.serviceImpact));
+        joiner.add(quote(this.servicePrio));
+        joiner.add(quote(this.lon));
+        joiner.add(quote(this.lat));
+        joiner.add(quote(this.managedFlag));
+        joiner.add(quote(this.utsaot));
+        joiner.add(quote(this.rcaCauseType));
+        joiner.add(quote(this.rcaEventType));
+        joiner.add(quote(this.rcaIdentifier));
+        joiner.add(quote(this.rcaOrgSeverity));
+        joiner.add(quote(this.rcaProblemText));
+        joiner.add(quote(this.rcaStateChange));
+        joiner.add(quote(this.remoteNodeAlias));
+        joiner.add(quote(this.remotePriObj));
+        joiner.add(quote(this.remoteRootObj));
+        joiner.add(quote(this.remoteSecObj));
+        joiner.add(quote(this.service));
+        joiner.add(quote(this.seServiceName));
+        joiner.add(quote(this.seProblemText));
+        joiner.add(quote(this.seServiceType));
+        joiner.add(quote(this.seState));
+        joiner.add(quote(this.layer));
+        joiner.add(quote(this.clusterName));
+        joiner.add(quote(this.clusterSize));
+        joiner.add(quote(this.monitoringOptions));
+        joiner.add(quote(this.useType));
+        joiner.add(quote(this.utsTime1));
+        joiner.add(quote(this.rcaOldSeverity));
+        joiner.add(quote(this.parked));
+        joiner.add(quote(this.frontOffice));
+        joiner.add(quote(this.region));
+        joiner.add(quote(this.alarmHelp));
+        joiner.add(quote(this.oidKey));
+        joiner.add(quote(this.oidVisible));
+        joiner.add(quote(this.classVisible));
+        joiner.add(quote(this.nodeVisible));
+        joiner.add(quote(this.nodeValue));
+        joiner.add(quote(this.parentIdentifier));
+        joiner.add(quote(this.ibmExtractedType));
+        joiner.add(quote(this.ibmProcessingStage));
+        joiner.add(quote(this.serverName));
+        joiner.add(quote(this.serverSerial));
 
         return joiner.toString();
     }

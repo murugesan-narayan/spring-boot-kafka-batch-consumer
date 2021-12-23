@@ -17,7 +17,6 @@ spring:
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
       properties:
-#        max.partition.fetch.bytes: 5194304
         max.partition.fetch.bytes: 13631488
         request.timeout.ms: 70000
         allow.auto.create.topics: false
