@@ -1,16 +1,13 @@
 spring:
   kafka:
-    security:
-      protocol: "SSL"
-    bootstrap-servers: localhost:9093
+#    security:
+#      protocol: "SSL"
+    bootstrap-servers: host.docker.internal:9092
     ssl:
-      trust-store-location: classpath:/client-certs/kafka.client.truststore.jks
+      trust-store-location: file:/user/share/spring-boot-kafka-batch-consumer/client-certs/kafka.client.truststore.jks
       trust-store-password: keypass1
-      key-store-location: classpath:/client-certs/kafka.client.keystore.jks
-      key-store-password: keypass1
     consumer:
-      group-id: Group-BC7.2.59
-      auto-offset-reset: earliest
+      group-id: Group-BC-TEST-ENV
       max-poll-records: 1000
       fetch-max-wait: 35000
       fetch-min-size: 3145728
@@ -23,10 +20,9 @@ spring:
         partition.assignment.strategy: org.apache.kafka.clients.consumer.RoundRobinAssignor
         fetch.max.bytes: 62914560
         spring.json.value.default.type: com.muru.kafka.consumer.demo.model.AlarmMessage
-    #   spring.json.trusted.packages: com.muru.kafka.consumer.demo.model
     listener:
       type: batch
       concurrency: 4
 consumer:
   topic-names: AlarmSync1,AlarmSync2,AlarmSync3,AlarmSync4
-  storage-path: target
+  storage-path: /user/share/bin

@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tefg-alarm-consumer-app
+  labels:
+    app: tefg-alarm-consumer-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tefg-alarm-consumer-app
+  template:
+    metadata:
+      labels:
+        app: tefg-alarm-consumer-app
+    spec:
+      containers:
+        - name: tefg-alarm-consumer-app
+          image: docker4muru/spring-boot-kafka-batch-consumer:1.0-SNAPSHOT
+          imagePullPolicy: Always
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: test

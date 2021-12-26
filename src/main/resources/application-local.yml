@@ -1,0 +1,32 @@
+spring:
+  kafka:
+    security:
+      protocol: "SSL"
+    bootstrap-servers: localhost:9093
+    ssl:
+      trust-store-location: classpath:/client-certs/kafka.client.truststore.jks
+      trust-store-password: keypass1
+#      key-store-location: classpath:/client-certs/kafka.client.keystore.jks
+#      key-store-password: keypass1
+    consumer:
+      group-id: Group-BC-LOCAL-71.2.59
+      auto-offset-reset: earliest
+      max-poll-records: 1000
+      fetch-max-wait: 35000
+      fetch-min-size: 3145728
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        max.partition.fetch.bytes: 13631488
+        request.timeout.ms: 70000
+        allow.auto.create.topics: false
+        partition.assignment.strategy: org.apache.kafka.clients.consumer.RoundRobinAssignor
+        fetch.max.bytes: 62914560
+        spring.json.value.default.type: com.muru.kafka.consumer.demo.model.AlarmMessage
+    #   spring.json.trusted.packages: com.muru.kafka.consumer.demo.model
+    listener:
+      type: batch
+      concurrency: 4
+consumer:
+  topic-names: AlarmSync1,AlarmSync2,AlarmSync3,AlarmSync4
+  storage-path: target
