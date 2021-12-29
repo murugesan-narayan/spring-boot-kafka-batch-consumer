@@ -1,6 +1,5 @@
 package com.muru.kafka.consumer.demo.listener;
 
-import com.muru.kafka.consumer.demo.exception.BatchProcessException;
 import com.muru.kafka.consumer.demo.model.AlarmMessage;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -28,19 +27,19 @@ public class KafkaBatchListener {
     @KafkaListener(topics = "#{'${consumer.topic-names}'.split(',')}")
     public void receive(List<AlarmMessage> data,
                         @Header(KafkaHeaders.RECEIVED_PARTITION_ID) List<Integer> partitions,
-                        @Header(KafkaHeaders.OFFSET) List<Long> offsets) {
+                        @Header(KafkaHeaders.OFFSET) List<Long> offsets) throws Exception {
         log.info("-------------------start of batch receive-------------------");
         log.info("Batch Size: {}", data.size());
         writeToFile(data);
         log.info("-------------------end of batch receive-------------------");
     }
 
-    private void writeToFile(List<AlarmMessage> alarmData) {
+    private void writeToFile(List<AlarmMessage> alarmData) throws Exception {
         try {
             String formattedTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("uuuu_MM_dd'T'hh_mm_ss_"));
             String formattedDate = formattedTime.substring(0, formattedTime.indexOf('T'));
             String formattedFileName = "AlarmData_"+formattedTime+"_"+UUID.randomUUID()+".csv";
-            Path file = Path.of(storagePath, formattedDate, formattedFileName);
+            Path file = Path.of(storagePath, formattedFileName);
             Path dir = Path.of(storagePath, formattedDate);
             if(!dir.toFile().exists()) {
                 Files.createDirectory(dir);
@@ -54,7 +53,7 @@ public class KafkaBatchListener {
             log.info("File is written in path: {}", file.toAbsolutePath());
         } catch (Exception e) {
             log.error("Exception thrown: ", e);
-            throw new BatchProcessException("Unable to write file");
+            throw e;
         }
     }
 }
