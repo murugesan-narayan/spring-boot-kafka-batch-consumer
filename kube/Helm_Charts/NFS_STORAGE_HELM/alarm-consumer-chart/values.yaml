@@ -1,0 +1,44 @@
+tef:
+    name: tef-alarm-consumer
+    serviceAccountName: tef-alarm-consumer-serviceaccount
+    serviceAccountLabel: tef-alarm-consumer
+    configMapName: tef-alarm-consumer-config
+    hostVolumeMounts:
+        logs:
+            name: teflogsdir
+        nasmount:
+            name: tefnasmount
+        appconfig:
+            name: tefappconfig
+        logconfig:
+            name: teflogconfig
+        truststore:
+            name: teftrustsoreconfig
+    container:
+        name: tef-alarm-consumer-app
+        image: myappcontainer.com/release/5.5/tef-alarm-consumer:v1
+        pullPolicy: Always
+        pullPolicySecret: myapppullsecret
+        volumeMounts:
+            appConfig: /data/workspace/tef-alarm-consumer/config/application.yml
+            appConfigSubpath: application.yml
+            logConfig: /data/workspace/tef-alarm-consumer/config/logback.xml
+            logConfigSubpath: logback.xml
+            truststoreConfig: /data/workspace/tef-alarm-consumer/config/kafka.client.truststore.jks
+            truststoreConfigSubpath: kafka.client.truststore.jks
+            logpath: /data/workspace/tef-alarm-consumer/logs/
+            logSubpath: tef-logs
+            nasmount: /data/workspace/tef-alarm-consumer/nasmount/
+            nasmountSubpath: nasmount
+        resources:
+            cpu: 250m
+    persistentVolumeClaim:
+        logs:
+            claimName: teflogpvc
+        nasmount:
+            claimName: tefdatapvc
+    horizontalPodAutoscaler:
+        name: tefhpa
+        minReplica: 1
+        maxReplica: 3
+        targetCPUUtilizationPercentage: 70

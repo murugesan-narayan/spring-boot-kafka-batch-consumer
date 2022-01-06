@@ -1,0 +1,60 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: teflogpv
+  labels:
+    type: local
+spec:
+  capacity:
+    storage: 10Gi
+  accessModes:
+  - ReadWriteOnce
+  hostPath:
+    path: /home/user/Persistent_Volume/teflogs/
+
+---
+
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: teflogpvc
+  labels:
+     type: local
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+
+---
+
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: tefdatapv
+  labels:
+    type: local
+spec:
+  capacity:
+    storage: 10Gi
+  accessModes:
+  - ReadWriteOnce
+  hostPath:
+    path: /home/user/Persistent_Volume/tefnasmount/
+
+---
+
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: tefdatapvc
+  labels:
+     type: local
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+

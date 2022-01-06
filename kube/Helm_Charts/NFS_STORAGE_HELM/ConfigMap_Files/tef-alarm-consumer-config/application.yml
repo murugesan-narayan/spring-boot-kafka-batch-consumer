@@ -3,20 +3,16 @@ jasypt:
     algorithm: PBEWithMD5AndDES
     iv-generator-classname: org.jasypt.iv.NoIvGenerator
     password: myappsecret
-#check the jasypt password it is changed.
 spring:
   kafka:
     security:
       protocol: "SSL"
-    bootstrap-servers: localhost:9093
+    bootstrap-servers: KAFKA1-S1:9093,KAFKA2-S3:9093,KAFKA3-S4:9093
     ssl:
-      trust-store-location: classpath:/client-certs/kafka.client.truststore.jks
-      trust-store-password: ENC(GN88ATmiO0phGTps28xMHLD+Kh3EYKHi)
-#      key-store-location: classpath:/client-certs/kafka.client.keystore.jks
-#      key-store-password: keypass1
+      trust-store-location: file:/data/workspace/tef-alarm-consumer/config/kafka.client.truststore.jks
+      trust-store-password: ENC(mavEo6MBO4aHuCh8vw4Ob23GJGqAmaT6)
     consumer:
-      group-id: Group-BC-LOCAL-71.2.59
-      auto-offset-reset: earliest
+      group-id: APP_CONSUMER-GROUP
       max-poll-records: 1000
       fetch-max-wait: 35000
       fetch-min-size: 3145728
@@ -28,11 +24,10 @@ spring:
         allow.auto.create.topics: false
         partition.assignment.strategy: org.apache.kafka.clients.consumer.RoundRobinAssignor
         fetch.max.bytes: 62914560
-        spring.json.value.default.type: com.muru.kafka.consumer.demo.model.AlarmMessage
-    #   spring.json.trusted.packages: com.muru.kafka.consumer.demo.model
+        spring.json.value.default.type: com.myapp.tef.alarm.consumer.model.AlarmMessage
     listener:
       type: batch
       concurrency: 4
 consumer:
   topic-names: AlarmSync1,AlarmSync2,AlarmSync3,AlarmSync4
-  storage-path: target
+  storage-path: /data/workspace/tef-alarm-consumer/nasmount

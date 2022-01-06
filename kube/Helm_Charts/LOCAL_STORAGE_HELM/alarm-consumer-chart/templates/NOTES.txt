@@ -1,0 +1,1 @@
+TEF Alarm Consumer- It consumes alarm messages from Telefonica kafka environment which will be used by CAN prediction.

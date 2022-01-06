@@ -1,0 +1,85 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: {{ .Values.tef.serviceAccountName }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: {{ .Values.tef.serviceAccountLabel }}
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: {{ .Values.tef.container.name }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Values.tef.container.name }}
+  replicas: {{ .Values.replicaCount }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.tef.container.name }}
+    spec:
+      serviceAccountName: {{ .Values.tef.serviceAccountName }}
+      volumes:
+      - name: {{ .Values.tef.hostVolumeMounts.logs.name }}
+        persistentVolumeClaim:
+          claimName: {{ .Values.tef.persistentVolumeClaim.logs.claimName }}
+      - name:  {{ .Values.tef.hostVolumeMounts.appconfig.name }}
+        configMap:
+          name: {{ .Values.tef.configMapName }}
+      - name: {{ .Values.tef.hostVolumeMounts.truststore.name }}
+        configMap:
+          name: {{ .Values.tef.configMapName }}
+      - name: {{ .Values.tef.hostVolumeMounts.logconfig.name }}
+        configMap:
+          name: {{ .Values.tef.configMapName }}
+      - name: {{ .Values.tef.hostVolumeMounts.nasmount.name }}
+        persistentVolumeClaim:
+          claimName: {{ .Values.tef.persistentVolumeClaim.nasmount.claimName }}
+      containers:
+      - name: {{ .Values.tef.container.name }}
+        image: {{ .Values.tef.container.image }}
+        imagePullPolicy: {{ .Values.tef.container.pullPolicy}}
+        volumeMounts:
+        - mountPath: {{ .Values.tef.container.volumeMounts.logpath }}
+          name: {{ .Values.tef.hostVolumeMounts.logs.name }}
+          subPath: {{ .Values.tef.container.volumeMounts.logSubpath }}
+        - mountPath: {{ .Values.tef.container.volumeMounts.appConfig }}
+          name: {{ .Values.tef.hostVolumeMounts.appconfig.name }}
+          subPath: {{ .Values.tef.container.volumeMounts.appConfigSubpath }}
+        - mountPath: {{ .Values.tef.container.volumeMounts.logConfig }}
+          name: {{ .Values.tef.hostVolumeMounts.logconfig.name }}
+          subPath: {{ .Values.tef.container.volumeMounts.logConfigSubpath }}
+        - mountPath: {{ .Values.tef.container.volumeMounts.truststoreConfig }}
+          name: {{ .Values.tef.hostVolumeMounts.truststore.name }}
+          subPath: {{ .Values.tef.container.volumeMounts.truststoreConfigSubpath }}
+        - mountPath: {{ .Values.tef.container.volumeMounts.nasmount }}
+          name: {{ .Values.tef.hostVolumeMounts.nasmount.name }}
+          subPath: {{ .Values.tef.container.volumeMounts.nasmountSubpath }}
+        resources:
+          requests:
+            cpu: {{ .Values.tef.container.resources.cpu }}
+      imagePullSecrets:
+      - name: {{ .Values.tef.container.pullPolicySecret }}
+
+---
+
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: {{ .Values.tef.horizontalPodAutoscaler.name }}
+  namespace: {{  .Release.Namespace  }}
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: {{ .Release.Name }}
+  minReplicas: {{ .Values.tef.horizontalPodAutoscaler.minReplica }}
+  maxReplicas: {{ .Values.tef.horizontalPodAutoscaler.maxReplica }}
+  targetCPUUtilizationPercentage: {{ .Values.tef.horizontalPodAutoscaler.targetCPUUtilizationPercentage }}
