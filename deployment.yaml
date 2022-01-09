@@ -21,3 +21,10 @@ spec:
           env:
             - name: SPRING_PROFILES_ACTIVE
               value: test
+          volumeMounts:
+            - name: tefg-data-vol
+              mountPath: /user/share/data/
+      volumes:
+        - name: tefg-data-vol
+          hostPath:
+            path: /home/tefg-data/

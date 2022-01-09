@@ -2,7 +2,7 @@ spring:
   kafka:
 #    security:
 #      protocol: "SSL"
-    bootstrap-servers: host.docker.internal:9092
+    bootstrap-servers: 192.168.0.3:9092
     ssl:
       trust-store-location: file:/user/share/spring-boot-kafka-batch-consumer/client-certs/kafka.client.truststore.jks
       trust-store-password: keypass1
@@ -25,4 +25,4 @@ spring:
       concurrency: 4
 consumer:
   topic-names: AlarmSync1,AlarmSync2,AlarmSync3,AlarmSync4
-  storage-path: /user/share/bin
+  storage-path: /user/share/data
