@@ -76,7 +76,7 @@ expect {
 timeout {abort}
 "sftp> " {
  send_log [exec echo $expect_out(buffer) | tr -d '\r']
- send "get /home/avanseus/Daily_Data_Dump-INC/INC_$file_date.csv /var/data/Persistent_Volume/tef-daaip/inc/\r"
+ send "get /home/testuser/Daily_Data_Dump-INC/INC_$file_date.csv /var/data/Persistent_Volume/tef-daaip/inc/\r"
  }
 }
 
@@ -84,7 +84,7 @@ expect {
 timeout {abort}
 "sftp> " {
  send_log [exec echo $expect_out(buffer) | tr -d '\r']
- send "get /home/avanseus/Daily_Data_Dump-WO/WO_$file_date.csv /var/data/Persistent_Volume/tef-daaip/wo/\r"
+ send "get /home/testuser/Daily_Data_Dump-WO/WO_$file_date.csv /var/data/Persistent_Volume/tef-daaip/wo/\r"
  }
 }
 
@@ -92,7 +92,7 @@ expect {
 timeout {abort}
 "sftp> " {
  send_log [exec echo $expect_out(buffer) | tr -d '\r']
- send "get /home/avanseus/Daily_Data_Dump-CRQ/crq_$file_date.csv /var/data/Persistent_Volume/tef-daaip/crq/\r"
+ send "get /home/testuser/Daily_Data_Dump-CRQ/crq_$file_date.csv /var/data/Persistent_Volume/tef-daaip/crq/\r"
  }
 }
 
