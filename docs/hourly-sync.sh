@@ -33,35 +33,77 @@ send_log "\n============================Start=======================\n"
 send_log "Start Time: $date $time\n"
 
 #############################################################################################################
+# script usage
+#############################################################################################################
+proc usage {code} {
+    puts [expr {$code ? "stderr" : "stdout"}] \
+    "$::argv0 --date file_date --types file_types --url file_url
+    --date       file_date  (Optional. Format: YYYY-MM-DD. Default: Previous day)
+    --types      file_types (Optional. Valid types: 2G,4G,5G,Ciruit_core,Packet_core
+                             One or more types of these with comma separated. Default: All)
+    --url_type   url_type   (Optional. Either Standard or Legacy: Default: Standard)
+    --help                  (Print out this message)"
+    exit $code
+}
+
+
+#############################################################################################################
+# parse args passed to the script
+#############################################################################################################
+array set OPTS {
+    file_date  ""
+    file_types ""
+    url_type   ""
+}
+
+proc parseargs {argv} {
+    global OPTS
+    foreach {key val} $argv {
+      switch -exact -- $key {
+        "--date"     { set OPTS(file_date)   $val }
+        "--types"    { set OPTS(file_types)  $val }
+        "--url_type" { set OPTS(url_type)    $val }
+        "--help"     { usage 0 }
+      }
+    }
+}
+send_log "Arguments passed: $argv\n"
+parseargs $argv
+
+
+#############################################################################################################
 # Determines the file's date and types to get from the server url
 # By default, it gets yesterday's file
 # It can be overridden by passing the date value in YYYY-MM-DD format to the script as argument when
-# running manually, for example ./hourly-sync.sh 2022-01-28
-# To get specific file type, ./hourly-sync.sh 2022-01-28 5G
-# To get multiple types, ./hourly-sync.sh 2022-01-28 4G,5G
+# running manually, for example
+# To get for particular date ./mycomm-fastoss-hourly-sync.sh --date 2022-01-28
+# To get specific file type  ./mycomm-fastoss-hourly-sync.sh --date 2022-01-28 --types 5G
+# To get specific url type   ./mycomm-fastoss-hourly-sync.sh --date 2022-01-28 --types 5G --url_type Legacy
+# To get multiple types      ./mycomm-fastoss-hourly-sync.sh --date 2022-01-28 --types 4G,5G
 #############################################################################################################
 set yday [clock scan yesterday]
 set date [clock format $yday -format {%Y-%m-%d}]
 set file_date $date
 
-set arg_date [lindex $argv 0]
-if { $arg_date != "" } {
-  set file_date $arg_date
+if { $OPTS(file_date) != "" } {
+  set file_date $OPTS(file_date)
 }
 
-set file_type_list [list 2G 4G 5G Ciruit_core]
-set arg_types [lindex $argv 1]
-if { $arg_types != "" } {
-  set file_type_list [split $arg_types ,]
+set file_type_list [list 2G 4G 5G Ciruit_core Packet_core]
+
+if { $OPTS(file_types) != "" } {
+  set file_type_list [split $OPTS(file_types) ,]
 }
+
 send_log "Getting files \[$file_type_list\] for the Date: $file_date\n"
 
 
 #############################################################################################################
-# gets files for the date identified in the previous step
-# files placed under /var/data/Persistent_Volume/test/ in their respective directories
+# gets MYCOMM files for the date identified in the previous step
+# files placed under /var/data/Persistent_Volume/tef-mycomm/fast_oss/hourly/ in their respective directories
 #############################################################################################################
-set my_url https://testweb.com/scheduled_reports/
+set mycomm_url https://lnxv-12910.dcn.de.pri.o2.com/scheduled_reports/FastOss
+set mycomm_legacy_url http://demucdnmfs01.nmc.de.pri.o2.com/PMR2/FS1/FastOss/
 
 set file_types_size [llength $file_type_list]
 for {set i 0} {$i < $file_types_size} {incr i 1} {
@@ -70,8 +112,12 @@ for {set i 0} {$i < $file_types_size} {incr i 1} {
  for {set h 0} {$h <= 23} {incr h} {
   set file_hour [format "%02d" $h]
   set file_name ""
-  append file_name Fast_ $file_type _Hourly_ $file_date - $file_hour :00.csv
-  spawn wget $my_url/$file_name --directory-prefix=/var/data/Persistent_Volume/test/$file_type/$file_date/
+  append file_name Fast_OSS_ $file_type _Hourly_ $file_date - $file_hour :00.csv
+  if { $OPTS(url_type) == "Legacy" } {
+   set mycomm_url $mycomm_legacy_url
+   append file_name .gz
+  }
+  spawn wget $mycomm_url/$file_name --directory-prefix=/var/data/Persistent_Volume/tef-mycomm/fast_oss/hourly/$file_type/$file_date/
 
   expect {
    timeout {abort}
@@ -85,6 +131,7 @@ for {set i 0} {$i < $file_types_size} {incr i 1} {
  }
  send_log "================== End $file_type =============================\n"
 }
+
 
 #############################################################################################################
 # logs current time as end time
