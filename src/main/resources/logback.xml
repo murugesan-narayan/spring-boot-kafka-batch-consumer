@@ -29,7 +29,7 @@
         <smtpPort>587</smtpPort>
         <STARTTLS>true</STARTTLS>
         <username>dev_tools@domain.com</username>
-        <password>Dev@53us</password>
+<!--        <password></password>-->
         <to>murugesan.n@domain.com</to> <!-- additional destinations are possible -->
         <from>dev_tools@domain.com</from>
         <subject>%level Alert from Local Env - Kafka Alarm Consumer Application</subject>
