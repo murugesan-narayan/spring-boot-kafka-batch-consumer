@@ -21,6 +21,31 @@
 <!--        </encoder>-->
 <!--    </appender>-->
 
+    <appender name="EMAIL" class="ch.qos.logback.classic.net.SMTPAppender">
+        <evaluator class="ch.qos.logback.classic.boolex.JaninoEventEvaluator">
+            <expression>return level >= WARN &amp;&amp; message.contains("Broker may not be available");</expression>
+        </evaluator>
+        <smtpHost>smtp.office365.com</smtpHost>
+        <smtpPort>587</smtpPort>
+        <STARTTLS>true</STARTTLS>
+        <username>dev_tools@domain.com</username>
+        <password>Dev@53us</password>
+        <to>murugesan.n@domain.com</to> <!-- additional destinations are possible -->
+        <from>dev_tools@domain.com</from>
+        <subject>%level Alert from Local Env - Kafka Alarm Consumer Application</subject>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>%date %-5level %logger{35} - %message%n</pattern>
+        </layout>
+        <cyclicBufferTracker class="ch.qos.logback.core.spi.CyclicBufferTracker">
+            <!-- send just one log entry per email -->
+            <bufferSize>1</bufferSize>
+        </cyclicBufferTracker>
+    </appender>
+
+<!--    <logger name="org.apache.kafka.clients.NetworkClient" level="WARN">-->
+<!--        <appender-ref ref="EMAIL"/>-->
+<!--    </logger>-->
+
     <logger name="com.muru.kafka.consumer.demo" level="INFO" />
     <logger name="org.springframework" level="WARN" />
 
